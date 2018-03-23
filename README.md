@@ -1,7 +1,12 @@
 # Stock Alerts
 
-# Prerequisites
+## Prerequisites
 
 * Node/NPM
 * npm install -g serverless
+
+## Deploy
+
+    cd src/parser
+    serverless deploy
 
