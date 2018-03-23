@@ -1,0 +1,23 @@
+version: 2
+# inspired by https://github.com/CircleCI-Public/circleci-demo-javascript-express
+jobs:
+  build:
+    docker:
+      - image: circleci/node:6.10
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: parser - test & coveralls
+          command: cd src/parser & npm run coveralls
+      - store_artifacts:
+          path: test-results.xml
+          prefix: tests

@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jest test --coverage"
+    "test": "./node_modules/.bin/jest test --coverage",
+    "coveralls": "./node_modules/.bin/jest test --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "watch:test": "npm run test -- --watch"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
     "jest": "^22.4.3"
   }
 }
