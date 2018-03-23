@@ -11,6 +11,5 @@
 
 ## Deploy
 
-    cd src/parser
     serverless deploy
 

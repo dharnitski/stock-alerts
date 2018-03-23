@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "./node_modules/.bin/jest test --coverage",
+    "coveralls": "./node_modules/.bin/jest test --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "watch:test": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -16,7 +18,9 @@
     "url": "https://github.com/dharnitski/stock-alerts/issues"
   },
   "homepage": "https://github.com/dharnitski/stock-alerts#readme",
-  "dependencies": {
-    "npm": "^5.7.1"
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
+    "jest": "^22.4.3"
   }
 }

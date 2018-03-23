@@ -1,3 +1,18 @@
+# package directories
 node_modules
-src/parser/coverage
+jspm_packages
+
+
+# Serverless directories
+.serverless
+
+
+# tests
+coverage
 .coveralls.yml
+
+
+
+
+
+
