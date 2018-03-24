@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:ndaq="http://www.nasdaqtrader.com/">
+  <channel>
+    <title>NASDAQTrader.com</title>
+    <link>http://www.nasdaqtrader.com</link>
+    <description>NASDAQ Trade Halts</description>
+    <copyright>Copyright 2018. All rights reserved.</copyright>
+    <pubDate>Sat, 24 Mar 2018 15:37:29 GMT</pubDate>
+    <ttl>1</ttl>
+    <ndaq:numItems>0</ndaq:numItems>
+  </channel>
+</rss>
