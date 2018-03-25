@@ -30,7 +30,7 @@ describe('Upload', () => {
                     try {
                         expect(err).to.not.exist;
                         expect(result).to.exist;
-                        expect(result).to.include('<title>NASDAQTrader.com</title>');
+                        expect(result.rss.channel[0].title[0]).to.equal('NASDAQTrader.com');
                         done();
                     }
                     catch (error) {
@@ -52,6 +52,27 @@ describe('Upload', () => {
                     try {
                         expect(err).to.exist;
                         expect(err.message).to.equal('got 500 from with body: some error');
+                        done();
+                    }
+                    catch (error) {
+                        done(error);
+                    }
+                });
+            });
+        });
+
+        describe('nasdaqtrader returns bad body', () => {
+            beforeEach(() => {
+                nock('https://www.nasdaqtrader.com/rss.aspx')
+                    .get('?feed=tradehalts')
+                    .reply(200, 'not xml');
+            });
+
+            it('should return error', (done) => {
+                myLambda.handler({}, { /* context */ }, (err, result) => {
+                    try {
+                        expect(err).to.exist;
+                        expect(err.message).to.include('Non-whitespace before first tag');
                         done();
                     }
                     catch (error) {

@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const parseString = require('xml2js').parseString;
 
 
 module.exports.handler = (event, context, callback) => {
@@ -20,26 +21,15 @@ module.exports.handler = (event, context, callback) => {
       return
     }
 
-    callback(null, body)
+    parseString(body, (error, result) => {
+      if (error) {
+        callback(error);
+        return
+      }
+
+      callback(null, result)
+    });
   })
-
-  // axios.get(url)
-  //   .then(response => {
-  //     callback(nil, response);
-  //   })
-  //   .catch(error => {
-  //     callback(error);
-  //   })
-
-  // const response = {
-  //   statusCode: 200,
-  //   body: JSON.stringify({
-  //     message: 'Go Serverless v1.0! Your function executed successfully!',
-  //     input: event,
-  //   }),
-  // };
-
-  // callback(null, response);
 
   // Use this code if you don't use the http event with the LAMBDA-PROXY integration
   // callback(null, { message: 'Go Serverless v1.0! Your function executed successfully!', event });
