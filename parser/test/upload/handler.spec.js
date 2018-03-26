@@ -30,7 +30,7 @@ describe('Upload', () => {
                     try {
                         expect(err).to.not.exist;
                         expect(result).to.exist;
-                        expect(result.rss.channel[0].title[0]).to.equal('NASDAQTrader.com');
+                        expect(result.channel.title).to.equal('NASDAQTrader.com');
                         done();
                     }
                     catch (error) {

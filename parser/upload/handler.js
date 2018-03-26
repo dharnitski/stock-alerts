@@ -3,6 +3,8 @@
 const request = require('request');
 const parseString = require('xml2js').parseString;
 
+const transform = require('./transform').transform
+
 
 module.exports.handler = (event, context, callback) => {
 
@@ -21,14 +23,10 @@ module.exports.handler = (event, context, callback) => {
       return
     }
 
-    parseString(body, (error, result) => {
-      if (error) {
-        callback(error);
-        return
-      }
-
-      callback(null, result)
-    });
+    transform(body).then(
+      data => callback(null, data),
+      err => callback(err)
+    )
   })
 
   // Use this code if you don't use the http event with the LAMBDA-PROXY integration
