@@ -15,7 +15,7 @@ describe('Transform', () => {
 
         it('should return', (done) => {
             transform(empty).then(actual => {
-        {/* <title>NASDAQTrader.com</title>
+                {/* <title>NASDAQTrader.com</title>
         <link>http://www.nasdaqtrader.com</link>
         <description>NASDAQ Trade Halts</description>
         <copyright>Copyright 2018. All rights reserved.</copyright>
@@ -27,6 +27,40 @@ describe('Transform', () => {
                 expect(actual.channel.description).to.equal('NASDAQ Trade Halts');
                 expect(actual.channel.pubDate.toISOString()).to.equal('2018-03-24T15:37:29.000Z');
                 expect(actual.channel.numItems).to.equal(0);
+                done();
+            })
+        })
+    })
+
+    describe('from 3 items', () => {
+
+        const empty = fs.readFileSync('./parser/test/testdata/3items.xml', 'utf8');
+
+        it('should return', (done) => {
+            transform(empty).then(actual => {
+                expect(actual.channel.numItems).to.equal(3);
+
+                const first = actual.channel.items[0]
+                expect(first.symbol).to.equal('WG');
+                expect(first.name).to.equal('Willbros Group, Inc.');
+                expect(first.market).to.equal('NYSE');
+                expect(first.reasonCode).to.equal('T1');
+                expect(first.haltTime.toISOString()).to.equal('2018-03-26T17:00:42.000Z');
+
+                const second = actual.channel.items[1]
+                expect(second.symbol).to.equal('ABIL');
+                expect(second.name).to.equal('Ability Inc.');
+                expect(second.market).to.equal('NASDAQ');
+                expect(second.reasonCode).to.equal('LUDP');
+                expect(second.haltTime.toISOString()).to.equal('2018-03-26T14:29:47.000Z');
+
+                const third = actual.channel.items[2]
+                expect(third.symbol).to.equal('LNCE');
+                expect(third.name).to.equal('Snyders-Lance, Inc.');
+                expect(third.market).to.equal('NASDAQ');
+                expect(third.reasonCode).to.equal('T12');
+                expect(third.haltTime.toISOString()).to.equal('2018-03-26T13:21:18.000Z');
+
                 done();
             })
         })
