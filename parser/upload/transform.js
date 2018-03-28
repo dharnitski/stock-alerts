@@ -104,9 +104,11 @@ function fromItem(item) {
         name: item['ndaq:IssueName'][0],
         market: item['ndaq:Market'][0],
         reasonCode: item['ndaq:ReasonCode'][0],
-        haltTime: parseTime(item['ndaq:HaltDate'][0] +  ' ' + item['ndaq:HaltTime'][0]),
-        // resumptionQuoteTime: item['ndaq:ReasonCode'][0],
-        // resumptionTradeTime: item['ndaq:ReasonCode'][0],
+        haltTime: parseTime(item['ndaq:HaltDate'][0] + ' ' + item['ndaq:HaltTime'][0]),
+    }
+    if (item['ndaq:ResumptionDate'][0]) {
+        result.resumptionQuoteTime = parseTime(item['ndaq:ResumptionDate'][0] + ' ' + item['ndaq:ResumptionQuoteTime'][0]);
+        result.resumptionTradeTime = parseTime(item['ndaq:ResumptionDate'][0] + ' ' + item['ndaq:ResumptionTradeTime'][0]);
     }
 
     return result
