@@ -1,6 +1,6 @@
 'use strict';
 const parseString = require('xml2js').parseString;
-const moment = require('moment');
+const moment = require('moment-timezone');
 
 function transform(response) {
 
@@ -115,12 +115,7 @@ function fromItem(item) {
 }
 
 function parseTime(str) {
-    // does not respect winter time
-    // const str = item['ndaq:HaltDate'][0] +  ' ' + item['ndaq:HaltTime'][0] + ' -0500';
-    // return moment(str, "MM/DD/YYYY HH:mm:ss Z");
-
-    //ToDo: code uses local time and works only in EST timezone
-    return moment(str, "MM/DD/YYYY HH:mm:ss");
+    return moment.tz(str, "MM/DD/YYYY HH:mm:ss", 'America/New_York');
 }
 
 module.exports = {
