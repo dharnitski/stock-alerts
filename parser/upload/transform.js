@@ -3,8 +3,6 @@ const parseString = require('xml2js').parseString;
 const moment = require('moment-timezone');
 
 function transform(response) {
-
-
     {/* <rss version="2.0" xmlns: ndaq="http://www.nasdaqtrader.com/">
     <channel>
         <title>NASDAQTrader.com</title>
@@ -31,7 +29,6 @@ function transform(response) {
     </item>
   </channel>
 </rss > */}
-
     return toJs(response).then(data => {
         const channel = data.rss.channel[0]
         return {
@@ -59,7 +56,6 @@ function toJs(response) {
         });
     });
 }
-
 
 // [ { title: [Array],
 //     pubDate: [Array],

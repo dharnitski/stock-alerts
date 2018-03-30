@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/dharnitski/stock-alerts#readme",
   "devDependencies": {
+    "aws-sdk": "^2.217.1",
+    "aws-sdk-mock": "^1.7.0",
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
     "jest": "^22.4.3",
