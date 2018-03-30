@@ -30,7 +30,7 @@ describe('Upload', () => {
                     try {
                         expect(err).to.not.exist;
                         expect(result).to.exist;
-                        expect(result.channel.title).to.equal('NASDAQTrader.com');
+                        //expect(result).to.equal('NASDAQTrader.com');
                         done();
                     }
                     catch (error) {
@@ -86,7 +86,7 @@ describe('Upload', () => {
             beforeEach(() => {
                 nock('https://www.nasdaqtrader.com/rss.aspx')
                     .get('?feed=tradehalts')
-                    .replyWithError({'message': 'something awful happened', 'code': 'AWFUL_ERROR'});
+                    .replyWithError({ 'message': 'something awful happened', 'code': 'AWFUL_ERROR' });
             });
 
             it('should return error', (done) => {
@@ -103,5 +103,21 @@ describe('Upload', () => {
             });
         });
 
+        // describe('integration test', () => {
+        //     it('should process halts', (done) => {
+        //         process.env.DYNAMODB_TABLE = 'stock-parser-dev';
+        //         myLambda.handler({}, { /* context */ }, (err, result) => {
+        //             try {
+        //                 expect(err).to.not.exist;
+        //                 expect(result).to.exist;
+        //                 //expect(result).to.equal('NASDAQTrader.com');
+        //                 done();
+        //             }
+        //             catch (error) {
+        //                 done(error);
+        //             }
+        //         });
+        //     });
+        // });
     });
 });

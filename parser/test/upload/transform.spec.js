@@ -27,6 +27,8 @@ describe('Transform', () => {
                 expect(actual.channel.description).to.equal('NASDAQ Trade Halts');
                 expect(actual.channel.pubDate.toISOString()).to.equal('2018-03-24T15:37:29.000Z');
                 expect(actual.channel.numItems).to.equal(0);
+                expect(actual.channel.items).to.be.empty;
+                
                 done();
             })
         })

@@ -29,23 +29,28 @@ function persist(event) {
         }
     }
 
+    for (var propt in item) {
+        if ((item[propt]) === '') {
+            console.log(`skip: ${JSON.stringify(item)}`);
+            return { status: "skip", reason: `empty ${propt}` }
+        }
+    }
+
     //get item
     return dynamoDb.get({
         TableName: table,
         Key: { id: id }
     }).promise()
         .then(data => {
-            //console.log(`get: ${JSON.stringify(data)}`);
             //save if item does not exist
             if (!data.Item) {
+                console.log(`save: ${JSON.stringify(item)}`);
                 return dynamoDb.put({
                     TableName: table,
                     Item: item,
-                }).promise().then()
+                }).promise()
             }
-            return new Promise((resolve) => {
-                resolve({status: "old"});
-            });
+            return { status: "exist" };
         })
 };
 

@@ -90,7 +90,6 @@ function items(from) {
     if (!from) {
         return []
     }
-
     return from.map(item => fromItem(item));
 }
 
@@ -111,7 +110,7 @@ function fromItem(item) {
 }
 
 function parseTime(str) {
-    return moment.tz(str, "MM/DD/YYYY HH:mm:ss", 'America/New_York');
+    return moment.tz(str, "MM/DD/YYYY HH:mm:ss", 'America/New_York').toDate();
 }
 
 module.exports = {

@@ -4,6 +4,7 @@ const request = require('request');
 const parseString = require('xml2js').parseString;
 
 const transform = require('./transform').transform
+const persist = require('./dynamodb').persist
 
 
 module.exports.handler = (event, context, callback) => {
@@ -23,10 +24,13 @@ module.exports.handler = (event, context, callback) => {
       return
     }
 
-    transform(body).then(
-      data => callback(null, data),
-      err => callback(err)
-    )
+    transform(body)
+      .then(data => {
+        return Promise.all(data.channel.items.map(item => persist(item)))
+      }).then(
+        data => callback(null, data),
+        err => callback(err)
+      )
   })
 
   // Use this code if you don't use the http event with the LAMBDA-PROXY integration
