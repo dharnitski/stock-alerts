@@ -97,10 +97,28 @@ function fromItem(item) {
     const result = {
         symbol: item['ndaq:IssueSymbol'][0],
         name: item['ndaq:IssueName'][0],
-        market: item['ndaq:Market'][0],
         reasonCode: item['ndaq:ReasonCode'][0],
         haltTime: parseTime(item['ndaq:HaltDate'][0] + ' ' + item['ndaq:HaltTime'][0]),
     }
+
+    if (item['ndaq:Market']) {
+        // Current feed returns Market as 
+        result.market = item['ndaq:Market'][0];
+    } else {
+        // Historical data returns Market as Mkt
+        const mkt = item['ndaq:Mkt'][0];
+        switch (mkt) {
+            case 'Q':
+                result.market = 'NASDAQ';
+                break;
+            case 'N':
+                result.market = 'NYSE';
+                break;
+            default:
+                result.market = mkt;
+        }
+    }
+
     if (item['ndaq:ResumptionDate'][0]) {
         result.resumptionQuoteTime = parseTime(item['ndaq:ResumptionDate'][0] + ' ' + item['ndaq:ResumptionQuoteTime'][0]);
         result.resumptionTradeTime = parseTime(item['ndaq:ResumptionDate'][0] + ' ' + item['ndaq:ResumptionTradeTime'][0]);

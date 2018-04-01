@@ -28,7 +28,7 @@ describe('Transform', () => {
                 expect(actual.channel.pubDate.toISOString()).to.equal('2018-03-24T15:37:29.000Z');
                 expect(actual.channel.numItems).to.equal(0);
                 expect(actual.channel.items).to.be.empty;
-                
+
                 done();
             })
         })
@@ -70,6 +70,28 @@ describe('Transform', () => {
                 expect(third.resumptionTradeTime).to.be.undefined;
 
                 done();
+            })
+        })
+
+        describe('from 3 items', () => {
+
+            const empty = fs.readFileSync('./parser/test/testdata/history.xml', 'utf8');
+
+            it('should return', (done) => {
+                transform(empty).then(actual => {
+                    expect(actual.channel.numItems).to.equal(3);
+
+                    const first = actual.channel.items[0]
+                    expect(first.market).to.equal('NASDAQ');
+
+                    const second = actual.channel.items[1]
+                    expect(second.market).to.equal('NASDAQ');
+
+                    const third = actual.channel.items[2]
+                    expect(third.market).to.equal('NYSE');
+
+                    done();
+                })
             })
         })
     })
