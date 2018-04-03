@@ -32,7 +32,7 @@ describe('Dymamo', () => {
                 expect(params.Item.market).to.equal('NYSE');
                 expect(params.Item.reasonCode).to.equal('T1');
                 expect(params.Item.haltTime).to.equal('2018-03-26T17:00:42.000Z');
-                callback(null, {name: 'a'});
+                callback(null, { name: 'a' });
             });
         });
         afterEach(() => {
@@ -68,34 +68,35 @@ describe('Dymamo', () => {
         })
     })
 
-    // describe('skip empty field', () => {
-    //     beforeEach(() => {
-    //         AWS.mock('DynamoDB.DocumentClient', 'get', (params, callback) => {
-    //             fail('get should not be called')
-    //         });
-    //         AWS.mock('DynamoDB.DocumentClient', 'put', (params, callback) => {
-    //             fail('put should not be called')
-    //         });
-    //     });
-    //     afterEach(() => {
-    //         AWS.restore('DynamoDB.DocumentClient');
-    //     })
+    describe('skip empty field', () => {
+        beforeEach(() => {
+            AWS.mock('DynamoDB.DocumentClient', 'get', (params, callback) => {
+                fail('get should not be called')
+            });
+            AWS.mock('DynamoDB.DocumentClient', 'put', (params, callback) => {
+                fail('put should not be called')
+            });
+        });
+        afterEach(() => {
+            AWS.restore('DynamoDB.DocumentClient');
+        })
 
-    //     it('should persist', (done) => {
-    //         const empty = {
-    //             //test items have empty symbol
-    //             symbol: '',
-    //             name: 'Willbros Group, Inc.',
-    //             market: 'NYSE',
-    //             reasonCode: 'T1',
-    //             haltTime: new Date('2018-03-26T17:00:42.000Z')
-    //         };
-    //         persist(item).then(actual => {
-    //             expect(actual.status).to.equal('exist');
-    //             done();
-    //         })
-    //     })
-    // })
+        const noSymbol = {
+            //test items have empty symbol
+            symbol: '',
+            name: 'Willbros Group, Inc.',
+            market: 'NYSE',
+            reasonCode: 'T1',
+            haltTime: new Date('2018-03-26T17:00:42.000Z')
+        };
+
+        it('should persist', (done) => {
+            persist(noSymbol).then(actual => {
+                expect(actual.status).to.equal('skip');
+                done();
+            })
+        })
+    })
 
     // describe('integration ', () => {
     //     it('should persist', (done) => {

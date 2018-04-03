@@ -95,10 +95,13 @@ function items(from) {
 
 const markets = new Map([
     ['Q', 'NASDAQ'],
+    ['A', 'AMEX'],
+    ['P', 'EMLB'],
+    ['Z', 'Non NASDAQ'],
     ['N', 'NYSE']]);
 
 function market(item) {
-    let result
+    let result;
     if (item['ndaq:Market']) {
         // Current feed returns Market as 
         result = item['ndaq:Market'][0];
@@ -109,7 +112,7 @@ function market(item) {
 
     const transformed = markets.get(result);
     if (transformed) {
-        result = transformed
+        result = transformed;
     }
 
     return result;
@@ -129,7 +132,7 @@ function fromItem(item) {
         result.resumptionTradeTime = parseTime(item['ndaq:ResumptionDate'][0] + ' ' + item['ndaq:ResumptionTradeTime'][0]);
     }
 
-    return result
+    return result;
 }
 
 function parseTime(str) {

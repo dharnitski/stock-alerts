@@ -43,7 +43,7 @@ function persist(event) {
     for (var propt in item) {
         if ((item[propt]) === '') {
             console.log(`skip: ${JSON.stringify(item)}`);
-            return { status: "skip", reason: `empty ${propt}` }
+            return Promise.resolve({ status: "skip", reason: `empty ${propt}` });
         }
     }
 
