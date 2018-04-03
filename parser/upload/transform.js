@@ -93,30 +93,35 @@ function items(from) {
     return from.map(item => fromItem(item));
 }
 
+const markets = new Map([
+    ['Q', 'NASDAQ'],
+    ['N', 'NYSE']]);
+
+function market(item) {
+    let result
+    if (item['ndaq:Market']) {
+        // Current feed returns Market as 
+        result = item['ndaq:Market'][0];
+    } else {
+        // Historical data returns Market as Mkt
+        result = item['ndaq:Mkt'][0];
+    }
+
+    const transformed = markets.get(result);
+    if (transformed) {
+        result = transformed
+    }
+
+    return result;
+}
+
 function fromItem(item) {
     const result = {
         symbol: item['ndaq:IssueSymbol'][0],
         name: item['ndaq:IssueName'][0],
         reasonCode: item['ndaq:ReasonCode'][0],
+        market: market(item),
         haltTime: parseTime(item['ndaq:HaltDate'][0] + ' ' + item['ndaq:HaltTime'][0]),
-    }
-
-    if (item['ndaq:Market']) {
-        // Current feed returns Market as 
-        result.market = item['ndaq:Market'][0];
-    } else {
-        // Historical data returns Market as Mkt
-        const mkt = item['ndaq:Mkt'][0];
-        switch (mkt) {
-            case 'Q':
-                result.market = 'NASDAQ';
-                break;
-            case 'N':
-                result.market = 'NYSE';
-                break;
-            default:
-                result.market = mkt;
-        }
     }
 
     if (item['ndaq:ResumptionDate'][0]) {

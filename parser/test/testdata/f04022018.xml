@@ -1,0 +1,223 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:ndaq="http://www.nasdaqtrader.com/">
+  <channel>
+    <title>NASDAQTrader.com</title>
+    <link>http://www.nasdaqtrader.com</link>
+    <description>NASDAQ Trade Halts</description>
+    <copyright>Copyright 2018. All rights reserved.</copyright>
+    <pubDate>Tue, 03 Apr 2018 01:31:29 GMT</pubDate>
+    <ttl>1</ttl>
+    <ndaq:numItems>14</ndaq:numItems>
+    <item>
+      <title>DISCB</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>15:33:02</ndaq:HaltTime>
+      <ndaq:IssueSymbol>DISCB</ndaq:IssueSymbol>
+      <ndaq:IssueName>Discovery, Inc. Ser B</ndaq:IssueName>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+      <ndaq:ReasonCode>LUDP</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>15:33:02</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>15:43:02</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">15:33:02                      </td><td valign="top">DISCB</td><td valign="top">Discovery, Inc. Ser B</td><td valign="top">NASDAQ</td><td valign="top">LUDP</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">15:33:02                      </td><td valign="top">15:43:02                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>NXEOU</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>14:33:34</ndaq:HaltTime>
+      <ndaq:IssueSymbol>NXEOU</ndaq:IssueSymbol>
+      <ndaq:IssueName>Nexeo Solutions, Inc. Unit</ndaq:IssueName>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+      <ndaq:ReasonCode>LUDP</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>14:33:34</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>14:38:34</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">14:33:34                      </td><td valign="top">NXEOU</td><td valign="top">Nexeo Solutions, Inc. Unit</td><td valign="top">NASDAQ</td><td valign="top">LUDP</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">14:33:34                      </td><td valign="top">14:38:34                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>BSWN</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>11:37:02</ndaq:HaltTime>
+      <ndaq:IssueSymbol>BSWN</ndaq:IssueSymbol>
+      <ndaq:IssueName>UBS AG VelocityShares VIX Tail Risk ETN linked to the S&amp;P 500 VIX Futures Tail Risk Index Short Term due July 18, 2046</ndaq:IssueName>
+      <ndaq:Market>NYSE Arca</ndaq:Market>
+      <ndaq:ReasonCode>M</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>11:42:02</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>11:42:02</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">11:37:02                      </td><td valign="top">BSWN</td><td valign="top">UBS AG VelocityShares VIX Tail Risk ETN linked to the S&P 500 VIX Futures Tail Risk Index Short Term due July 18, 2046</td><td valign="top">NYSE Arca</td><td valign="top">M</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">11:42:02                      </td><td valign="top">11:42:02                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>VXZB</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>11:36:24</ndaq:HaltTime>
+      <ndaq:IssueSymbol>VXZB</ndaq:IssueSymbol>
+      <ndaq:IssueName>iPath Series B S&amp;P 500 VIX Mid-Term Futures ETN</ndaq:IssueName>
+      <ndaq:Market>Non NASDAQ</ndaq:Market>
+      <ndaq:ReasonCode>M</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>11:41:24</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>11:41:24</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">11:36:24                      </td><td valign="top">VXZB</td><td valign="top">iPath Series B S&P 500 VIX Mid-Term Futures ETN</td><td valign="top">Non NASDAQ</td><td valign="top">M</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">11:41:24                      </td><td valign="top">11:41:24                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>BFRA</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>11:30:27</ndaq:HaltTime>
+      <ndaq:IssueSymbol>BFRA</ndaq:IssueSymbol>
+      <ndaq:IssueName>Biofrontera AG ADS</ndaq:IssueName>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+      <ndaq:ReasonCode>LUDP</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>11:30:27</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>11:35:27</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">11:30:27                      </td><td valign="top">BFRA</td><td valign="top">Biofrontera AG ADS</td><td valign="top">NASDAQ</td><td valign="top">LUDP</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">11:30:27                      </td><td valign="top">11:35:27                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>BOXL</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>11:08:58</ndaq:HaltTime>
+      <ndaq:IssueSymbol>BOXL</ndaq:IssueSymbol>
+      <ndaq:IssueName>Boxlight Corp Class A Cmn</ndaq:IssueName>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+      <ndaq:ReasonCode>LUDP</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>11:08:58</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>11:18:58</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">11:08:58                      </td><td valign="top">BOXL</td><td valign="top">Boxlight Corp Class A Cmn</td><td valign="top">NASDAQ</td><td valign="top">LUDP</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">11:08:58                      </td><td valign="top">11:18:58                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>SLS</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>10:40:36</ndaq:HaltTime>
+      <ndaq:IssueSymbol>SLS</ndaq:IssueSymbol>
+      <ndaq:IssueName>SELLAS Life Sciences Gp Cmn</ndaq:IssueName>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+      <ndaq:ReasonCode>LUDP</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>10:40:36</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>10:45:36</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">10:40:36                      </td><td valign="top">SLS</td><td valign="top">SELLAS Life Sciences Gp Cmn</td><td valign="top">NASDAQ</td><td valign="top">LUDP</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">10:40:36                      </td><td valign="top">10:45:36                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>SLS</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>10:27:05</ndaq:HaltTime>
+      <ndaq:IssueSymbol>SLS</ndaq:IssueSymbol>
+      <ndaq:IssueName>SELLAS Life Sciences Gp Cmn</ndaq:IssueName>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+      <ndaq:ReasonCode>LUDP</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>10:27:05</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>10:37:05</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">10:27:05                      </td><td valign="top">SLS</td><td valign="top">SELLAS Life Sciences Gp Cmn</td><td valign="top">NASDAQ</td><td valign="top">LUDP</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">10:27:05                      </td><td valign="top">10:37:05                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>SLS</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>10:15:04</ndaq:HaltTime>
+      <ndaq:IssueSymbol>SLS</ndaq:IssueSymbol>
+      <ndaq:IssueName>SELLAS Life Sciences Gp Cmn</ndaq:IssueName>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+      <ndaq:ReasonCode>LUDP</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>10:15:04</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>10:25:04</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">10:15:04                      </td><td valign="top">SLS</td><td valign="top">SELLAS Life Sciences Gp Cmn</td><td valign="top">NASDAQ</td><td valign="top">LUDP</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">10:15:04                      </td><td valign="top">10:25:04                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>PGD</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>09:31:55</ndaq:HaltTime>
+      <ndaq:IssueSymbol>PGD</ndaq:IssueSymbol>
+      <ndaq:IssueName>iPath Asian and Gulf Currency Revaluation ETN Revaluation ETN</ndaq:IssueName>
+      <ndaq:Market>NYSE Arca</ndaq:Market>
+      <ndaq:ReasonCode>M</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>09:36:55</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>09:36:55</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">09:31:55                      </td><td valign="top">PGD</td><td valign="top">iPath Asian and Gulf Currency Revaluation ETN Revaluation ETN</td><td valign="top">NYSE Arca</td><td valign="top">M</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">09:36:55                      </td><td valign="top">09:36:55                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>SHSP</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>09:30:39</ndaq:HaltTime>
+      <ndaq:IssueSymbol>SHSP</ndaq:IssueSymbol>
+      <ndaq:IssueName>SharpSpring, Inc. Cmn Stk</ndaq:IssueName>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+      <ndaq:ReasonCode>LUDP</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>09:30:39</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>09:35:39</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">09:30:39                      </td><td valign="top">SHSP</td><td valign="top">SharpSpring, Inc. Cmn Stk</td><td valign="top">NASDAQ</td><td valign="top">LUDP</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">09:30:39                      </td><td valign="top">09:35:39                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>EMLB</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>09:30:15</ndaq:HaltTime>
+      <ndaq:IssueSymbol>EMLB</ndaq:IssueSymbol>
+      <ndaq:IssueName>iPath Long Enhanced MSCI Emerging Markets Index ETN</ndaq:IssueName>
+      <ndaq:Market>NYSE Arca</ndaq:Market>
+      <ndaq:ReasonCode>M</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>09:50:15</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>09:50:15</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">09:30:15                      </td><td valign="top">EMLB</td><td valign="top">iPath Long Enhanced MSCI Emerging Markets Index ETN</td><td valign="top">NYSE Arca</td><td valign="top">M</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">09:50:15                      </td><td valign="top">09:50:15                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>JRJR</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>08:52:08</ndaq:HaltTime>
+      <ndaq:IssueSymbol>JRJR</ndaq:IssueSymbol>
+      <ndaq:IssueName>JRJR33, Inc.</ndaq:IssueName>
+      <ndaq:Market>AMEX</ndaq:Market>
+      <ndaq:ReasonCode>D</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>17:10:00</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>17:10:00</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">08:52:08                      </td><td valign="top">JRJR</td><td valign="top">JRJR33, Inc. </td><td valign="top">AMEX</td><td valign="top">D</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">17:10:00                      </td><td valign="top">17:10:00                      </td></tr></table>]]></description>
+    </item>
+    <item>
+      <title>ALKS</title>
+      <pubDate>Mon, 02 Apr 2018 04:00:00 GMT</pubDate>
+      <ndaq:HaltDate>04/02/2018</ndaq:HaltDate>
+      <ndaq:HaltTime>06:57:06</ndaq:HaltTime>
+      <ndaq:IssueSymbol>ALKS</ndaq:IssueSymbol>
+      <ndaq:IssueName>Alkermes plc</ndaq:IssueName>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+      <ndaq:ReasonCode>T3</ndaq:ReasonCode>
+      <ndaq:PauseThresholdPrice />
+      <ndaq:ResumptionDate>04/02/2018</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>07:25:00</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>07:30:00</ndaq:ResumptionTradeTime>
+      <description><![CDATA[<table width="100%" cellpadding="5"><tr><th align="left">Halt Date</th><th align="left">Halt Time</th><th align="left">Issue Symbol</th><th align="left">Issue Name</th><th align="left">Market</th><th align="left">Reason Code</th><th align="left">Pause Threshold Price</th><th align="left">Resumption Date</th><th align="left">Resumption Quote Time</th><th align="left">Resumption Trade Time</th></tr><tr><td valign="top">04/02/2018                    </td><td valign="top">06:57:06                      </td><td valign="top">ALKS</td><td valign="top">Alkermes plc</td><td valign="top">NASDAQ</td><td valign="top">T3</td><td valign="top"></td><td valign="top">04/02/2018                    </td><td valign="top">07:25:00                      </td><td valign="top">07:30:00                      </td></tr></table>]]></description>
+    </item>
+  </channel>
+</rss>
