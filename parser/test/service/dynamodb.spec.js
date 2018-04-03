@@ -4,7 +4,7 @@
 var AWS = require('aws-sdk-mock');
 const expect = require('chai').expect;
 
-const persist = require('../../upload/dynamodb').persist;
+const persist = require('../../service/dynamodb').persist;
 
 describe('Dymamo', () => {
     process.env.DYNAMODB_TABLE = 'stock-parser-dev';

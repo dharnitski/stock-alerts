@@ -3,13 +3,24 @@
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 
 
-
-function persist(event) {
-    const dynamoDb = new AWS.DynamoDB.DocumentClient(
+function db() {
+    return new AWS.DynamoDB.DocumentClient(
         {
             region: 'us-east-1'
         }
     );
+}
+
+function list() {
+    const dynamoDb = db();
+    const params = {
+        TableName: process.env.DYNAMODB_TABLE,
+    };
+    return dynamoDb.scan(params).promise();
+}
+
+function persist(event) {
+    const dynamoDb = db();
 
     const timestamp = new Date().toISOString();
     const table = process.env.DYNAMODB_TABLE;
@@ -56,4 +67,5 @@ function persist(event) {
 
 module.exports = {
     persist: persist,
+    list: list,
 }

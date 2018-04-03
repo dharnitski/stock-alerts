@@ -4,14 +4,13 @@ const request = require('request');
 const parseString = require('xml2js').parseString;
 
 const transform = require('./transform').transform
-const persist = require('./dynamodb').persist
+const persist = require('../service/dynamodb').persist
 
 
 module.exports.handler = (event, context, callback) => {
 
-  const url =
-    "https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts";
-
+  //const url = "https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts&haltdate=03282018";
+  const url = "https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts";
 
   request(url, (error, response, body) => {
     if (error) {
