@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Serverless Notifications</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>Serverless Notifications</h2>
+        </div>
+        <div class="row">
+            <input id="btn-keys" type="button" class="btn btn-primary" value='Retrieve Keys'>
+            <input id="btn-connect" type="button" class="btn btn-primary" value='Connect'>
+        </div>
+        <div class="row">
+            <input id="message" type="text">
+            <input id="btn-send" type="button" class="btn btn-primary" value='Send Message'>
+        </div>
+        <div class="row">
+            <h3>Log Messages</h3>
+            <ul id="log"></ul>
+        </div>
+    </div>
+    <script src="jquery.min.js"></script>
+    <script type="text/javascript">
+        window.lambdaEndpoint = 'https://abcdefghij.execute-api.us-east-1.amazonaws.com/dev/iot/keys';
+    </script>
+    <script src="bundle.js"></script>
+    <!-- IoT -->
+</body>
+
+</html>

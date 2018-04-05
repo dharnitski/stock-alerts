@@ -13,3 +13,6 @@
 
     serverless deploy
 
+## Deploy front end
+
+    serverless client deploy
