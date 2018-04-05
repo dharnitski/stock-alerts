@@ -60,6 +60,7 @@ functions:
      - http:
          path: halts/list
          method: get
+         cors: true
 
 resources:
   Resources:
