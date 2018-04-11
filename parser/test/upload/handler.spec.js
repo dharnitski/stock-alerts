@@ -105,7 +105,7 @@ describe('Upload', () => {
 
         // describe('integration test', () => {
         //     it('should process halts', (done) => {
-        //         process.env.DYNAMODB_TABLE = 'stock-parser-dev';
+        //         process.env.DYNAMODB_TABLE = 'stock-alerts-dev';
         //         myLambda.handler({}, { /* context */ }, (err, result) => {
         //             try {
         //                 expect(err).to.not.exist;

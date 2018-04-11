@@ -7,7 +7,7 @@ const expect = require('chai').expect;
 const myLambda = require('../../results/handler');
 
 describe('Results', () => {
-    process.env.DYNAMODB_TABLE = 'stock-parser-dev';
+    process.env.DYNAMODB_TABLE = 'stock-alerts-dev';
 
     const item = {
         symbol: 'WG',
@@ -20,7 +20,7 @@ describe('Results', () => {
     describe('get one', () => {
         beforeEach(() => {
             AWS.mock('DynamoDB.DocumentClient', 'scan', (params, callback) => {
-                expect(params.TableName).to.equal('stock-parser-dev');
+                expect(params.TableName).to.equal('stock-alerts-dev');
                 callback(null, { Items: [item] });
             });
         });
@@ -44,13 +44,17 @@ describe('Results', () => {
     })
 
     describe('throw error', () => {
+        let old;
         beforeEach(() => {
+            old = console.error;
+            console.error = () => { };
             AWS.mock('DynamoDB.DocumentClient', 'scan', (params, callback) => {
                 callback(new Error('Boom!'));
             });
         });
         afterEach(() => {
             AWS.restore('DynamoDB.DocumentClient');
+            console.error = old;
         })
 
         it('should return', (done) => {

@@ -25,7 +25,7 @@ module.exports.handler = (event, context, callback) => {
 
     transform(body)
       .then(data => {
-        return Promise.all(data.channel.items.map(item => persist(item)))
+        return persist(data.channel.items);
       }).then(
         data => callback(null, data),
         err => callback(err)

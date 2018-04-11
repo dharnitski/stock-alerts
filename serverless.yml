@@ -1,4 +1,4 @@
-service: stock-parser
+service: stock-alerts
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -70,12 +70,18 @@ resources:
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: id
-            AttributeType: S
+            AttributeName: "haltDate"
+            AttributeType: "S"
+          - 
+            AttributeName: "sort"
+            AttributeType: "S"
         KeySchema:
           -
-            AttributeName: id
+            AttributeName: "haltDate"
             KeyType: HASH
+          - 
+            AttributeName: "sort"
+            KeyType: "RANGE"
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
