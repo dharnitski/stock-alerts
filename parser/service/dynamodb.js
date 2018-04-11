@@ -80,9 +80,16 @@ function persistDay(haltDate, events) {
     })
 }
 
-//event - incoming events
+//event - incoming event
 //saved - existing events in dynamodb
 function saveOne(event, saved, dynamoDb) {
+
+    //skip test events
+    if (!event.symbol) {
+        console.log(`skip: ${JSON.stringify(event)}`);
+            return { status: "skip", reason: `empty ${propt}` };
+    }
+
     let match;
     saved.forEach(existing => {
         if (event.symbol === existing.symbol
@@ -124,8 +131,8 @@ function persist(events) {
     const grouped = groupBy(events, (e) => formatDate(e));
 
     return Promise.all(Object.getOwnPropertyNames(grouped).map(g => persistDay(g, grouped[g])))
-    //flatten array or arrays
-    .then(r => r.reduce(( accumulator, currentValue ) => accumulator.concat(currentValue),[]));
+        //flatten array or arrays
+        .then(r => r.reduce((accumulator, currentValue) => accumulator.concat(currentValue), []));
 };
 
 module.exports = {
