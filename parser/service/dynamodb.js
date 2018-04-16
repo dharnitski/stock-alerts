@@ -85,7 +85,7 @@ function persistDay(haltDate, events) {
 function saveOne(event, saved, dynamoDb) {
 
     //skip test events
-    if (!event.symbol) {
+    if (!event.symbol || !event.name) {
         console.log(`skip: ${JSON.stringify(event)}`);
             return { status: "skip", reason: `empty ${propt}` };
     }
