@@ -23,16 +23,12 @@
 ## Build Client
 
     cd client
-
+    npm run build
 
 
 ## Deploy Client
 
     serverless client deploy
 
-## Run Client locally
-
-1. Copy path to file path to `/client/dist/index.html` 
-2. Open that path in browser
 
 
