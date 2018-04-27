@@ -28,9 +28,7 @@ export default {
   methods: {
     fetchStocks: function() {
       this.$http
-        .get(
-          "https://4j74uujey2.execute-api.us-east-1.amazonaws.com/dev/halts/list"
-        )
+        .get("https://wdqcwuy9r2.execute-api.us-east-1.amazonaws.com/dev/halts/list")
         .then(response => {
           this.halts = response.data;
         })

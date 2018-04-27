@@ -31,7 +31,6 @@ provider:
         - 'sts:AssumeRole'
       Resource: "*"
 
-
 plugins:
   - serverless-finch
 
@@ -62,9 +61,17 @@ functions:
          method: get
          cors: true
 
+  auth:
+    handler: parser/auth/handler.handler
+    events:
+      - http: GET iot/keys
+    timeout: 10
+
+
 resources:
   Resources:
-    TodosDynamoDbTable:
+    
+    AlertsDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
@@ -86,3 +93,38 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
+
+    ClientRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: stock-alerts-client
+        Path: /
+        AssumeRolePolicyDocument: 
+          Version: '2012-10-17'
+          Statement: 
+            - 
+              Effect: Allow
+              Action: 
+                - sts:AssumeRole
+              Principal: 
+                AWS: 
+                  - 'Fn::Join':
+                      - ':'
+                      -
+                        - 'arn:aws:iam:'
+                        - Ref: 'AWS::AccountId'
+                        - 'root'
+        Policies: 
+          - 
+            PolicyName: "stock-alerts-client-iot"
+            PolicyDocument: 
+              Version: "2012-10-17"
+              Statement: 
+                - 
+                  Effect: "Allow"
+                  Action: 
+                    - iot:Connect
+                    - iot:Subscribe
+                    - iot:Publish
+                    - iot:Receive
+                  Resource: "*"

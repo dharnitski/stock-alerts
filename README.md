@@ -12,7 +12,7 @@
 
 ## Deploy Server
 
-    serverless deploy
+    serverless deploy -v
 
 
 ## Run Clint locally 
