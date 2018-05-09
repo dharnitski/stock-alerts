@@ -7,14 +7,23 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: server-cache-{{ checksum "package.json" }}
+      - restore_cache:
+          key: client-cache-{{ checksum "client/package.json" }}
       - run:
           name: install-npm-wee
           command: npm install
+      - run:
+          name: install-npm-client
+          command: cd cient && npm install    
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: server-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+      - save_cache:
+          key: client-cache-{{ checksum "client/package.jsonn" }}
+          paths:
+            - ./client/node_modules      
       - run:
           name: parser - test & coveralls
           command: npm run coveralls
