@@ -21,7 +21,7 @@ jobs:
           paths:
             - ./node_modules
       - save_cache:
-          key: client-cache-{{ checksum "client/package.jsonn" }}
+          key: client-cache-{{ checksum "client/package.json" }}
           paths:
             - ./client/node_modules      
       - run:
