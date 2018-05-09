@@ -19,21 +19,37 @@ export default {
   data: () => {
     return {
       halts: [],
-      errors: []
+      errors: [],
+      credentials: null
     };
   },
   created: function() {
     this.fetchStocks();
+    this.fetchCredentials();
   },
   methods: {
     fetchStocks: function() {
       this.$http
-        .get("https://wdqcwuy9r2.execute-api.us-east-1.amazonaws.com/dev/halts/list")
+        .get(
+          "https://wdqcwuy9r2.execute-api.us-east-1.amazonaws.com/dev/halts/list"
+        )
         .then(response => {
           this.halts = response.data;
         })
         .catch(e => {
           this.errors.push(e);
+        });
+    },
+    fetchCredentials: function() {
+      this.$http
+        .get(
+          "https://wdqcwuy9r2.execute-api.us-east-1.amazonaws.com/dev/iot/keys"
+        )
+        .then(response => {
+          this.credentials = response;
+        })
+        .catch(e => {
+          log.console.error(e);
         });
     }
   }

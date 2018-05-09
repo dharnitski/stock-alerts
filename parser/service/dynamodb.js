@@ -1,6 +1,6 @@
 'use strict';
 
-const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
+const AWS = require('aws-sdk');
 
 
 function db() {
@@ -39,7 +39,7 @@ function groupBy(xs, f) {
 //     const dynamoDb = db();
 //     var params = {
 //         ExpressionAttributeValues: {
-//             ':id': 'GNPX1523024948' 
+//             ':id': 'GNPX1523024948'
 //         },
 
 //         //KeyConditionExpression: 'id = :id',
@@ -87,7 +87,7 @@ function saveOne(event, saved, dynamoDb) {
     //skip test events
     if (!event.symbol || !event.name) {
         console.log(`skip: ${JSON.stringify(event)}`);
-            return { status: "skip", reason: `empty ${propt}` };
+        return { status: "skip", reason: `empty ${propt}` };
     }
 
     let match;
