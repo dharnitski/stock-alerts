@@ -15,7 +15,7 @@ jobs:
           command: npm install
       - run:
           name: install-npm-client
-          command: cd cient && npm install    
+          command: cd client && npm install    
       - save_cache:
           key: server-cache-{{ checksum "package.json" }}
           paths:
