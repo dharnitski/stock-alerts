@@ -7,15 +7,19 @@
 
 * Node/NPM
 * npm install -g serverless
-* setup ~/.aws/credentials
+* aws-cli
 * npm install -g vue-cli
+
+## Install Dependencies
+
+    npm install
 
 ## Deploy Server
 
     serverless deploy -v
 
 
-## Run Clint locally 
+## Run Client locally 
 
     cd client
     npm run dev
