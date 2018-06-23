@@ -14,7 +14,7 @@ describe('Upload', () => {
             nock.cleanAll();
         });
 
-        describe('nasdaqtrader returns empty list', () => {
+        describe('nasdaqtrader returned empty list', () => {
             beforeEach(() => {
                 const empty = fs.readFileSync('./parser/test/testdata/empty.xml', 'utf8');
                 nock('https://www.nasdaqtrader.com/rss.aspx')
@@ -22,16 +22,9 @@ describe('Upload', () => {
                     .reply(200, empty);
             });
 
-            it('should process halts', (done) => {
-                myLambda.handler({}, { /* context */ }, (err, result) => {
-                    try {
-                        expect(err).to.not.exist;
-                        expect(result).to.exist;
-                        done();
-                    } catch (error) {
-                        done(error);
-                    }
-                });
+            it('should process halts', async () => {
+                const actual = await myLambda.handler({});
+                expect(actual).to.deep.equal([]);
             });
         });
 
@@ -42,16 +35,14 @@ describe('Upload', () => {
                     .reply(500, 'some error');
             });
 
-            it('should return error', (done) => {
-                myLambda.handler({}, { /* context */ }, (err, result) => {
-                    try {
-                        expect(err).to.exist;
-                        expect(err.message).to.equal('got 500 from with body: some error');
-                        done();
-                    } catch (error) {
-                        done(error);
-                    }
-                });
+            it('should return error', async (done) => {
+                try {
+                    await myLambda.handler({});
+                    done('Should throw an error');
+                } catch (error) {
+                    expect(error.message).to.equal('got 500 from with body: some error');
+                    done();
+                }
             });
         });
 
@@ -62,16 +53,14 @@ describe('Upload', () => {
                     .reply(200, 'not xml');
             });
 
-            it('should return error', (done) => {
-                myLambda.handler({}, { /* context */ }, (err, result) => {
-                    try {
-                        expect(err).to.exist;
-                        expect(err.message).to.include('Non-whitespace before first tag');
-                        done();
-                    } catch (error) {
-                        done(error);
-                    }
-                });
+            it('should return error', async (done) => {
+                try {
+                    await myLambda.handler({});
+                    done('Should throw an error');
+                } catch (error) {
+                    expect(error.message).to.include('Non-whitespace before first tag');
+                    done();
+                }
             });
         });
 
@@ -79,19 +68,17 @@ describe('Upload', () => {
             beforeEach(() => {
                 nock('https://www.nasdaqtrader.com/rss.aspx')
                     .get('?feed=tradehalts')
-                    .replyWithError({'message': 'something awful happened', 'code': 'AWFUL_ERROR'});
+                    .replyWithError({ 'message': 'something awful happened', 'code': 'AWFUL_ERROR' });
             });
 
-            it('should return error', (done) => {
-                myLambda.handler({}, { /* context */ }, (err, result) => {
-                    try {
-                        expect(err).to.exist;
-                        expect(err.message).to.equal('request to https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts failed, reason: something awful happened');
-                        done();
-                    } catch (error) {
-                        done(error);
-                    }
-                });
+            it('should return error', async (done) => {
+                try {
+                    await myLambda.handler({});
+                    done('Should throw an error');
+                } catch (error) {
+                    expect(error.message).to.equal('request to https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts failed, reason: something awful happened');
+                    done();
+                }
             });
         });
 
