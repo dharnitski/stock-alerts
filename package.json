@@ -31,7 +31,7 @@
   "dependencies": {
     "aws-sdk": "^2.217.1",
     "moment-timezone": "^0.5.14",
-    "request": "^2.85.0",
+    "node-fetch": "^2.1.2",
     "xml2js": "^0.4.19"
   }
 }

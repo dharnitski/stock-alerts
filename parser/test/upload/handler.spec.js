@@ -2,20 +2,17 @@
 /* global describe it beforeEach */
 
 
-
 const nock = require('nock');
 const expect = require('chai').expect;
-const fs = require("fs");
+const fs = require('fs');
 
 const myLambda = require('../../upload/handler');
 
 describe('Upload', () => {
-
     describe('handler', () => {
-
         afterEach(() => {
-            nock.cleanAll()
-        })
+            nock.cleanAll();
+        });
 
         describe('nasdaqtrader returns empty list', () => {
             beforeEach(() => {
@@ -30,10 +27,8 @@ describe('Upload', () => {
                     try {
                         expect(err).to.not.exist;
                         expect(result).to.exist;
-                        //expect(result).to.equal('NASDAQTrader.com');
                         done();
-                    }
-                    catch (error) {
+                    } catch (error) {
                         done(error);
                     }
                 });
@@ -53,8 +48,7 @@ describe('Upload', () => {
                         expect(err).to.exist;
                         expect(err.message).to.equal('got 500 from with body: some error');
                         done();
-                    }
-                    catch (error) {
+                    } catch (error) {
                         done(error);
                     }
                 });
@@ -74,8 +68,7 @@ describe('Upload', () => {
                         expect(err).to.exist;
                         expect(err.message).to.include('Non-whitespace before first tag');
                         done();
-                    }
-                    catch (error) {
+                    } catch (error) {
                         done(error);
                     }
                 });
@@ -86,17 +79,16 @@ describe('Upload', () => {
             beforeEach(() => {
                 nock('https://www.nasdaqtrader.com/rss.aspx')
                     .get('?feed=tradehalts')
-                    .replyWithError({ 'message': 'something awful happened', 'code': 'AWFUL_ERROR' });
+                    .replyWithError({'message': 'something awful happened', 'code': 'AWFUL_ERROR'});
             });
 
             it('should return error', (done) => {
                 myLambda.handler({}, { /* context */ }, (err, result) => {
                     try {
                         expect(err).to.exist;
-                        expect(err.message).to.equal('something awful happened');
+                        expect(err.message).to.equal('request to https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts failed, reason: something awful happened');
                         done();
-                    }
-                    catch (error) {
+                    } catch (error) {
                         done(error);
                     }
                 });

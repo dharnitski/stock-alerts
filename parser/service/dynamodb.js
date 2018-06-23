@@ -6,7 +6,7 @@ const AWS = require('aws-sdk');
 function db() {
     return new AWS.DynamoDB.DocumentClient(
         {
-            region: 'us-east-1'
+            region: 'us-east-1',
         }
     );
 }
@@ -51,21 +51,26 @@ function groupBy(xs, f) {
 //     return dynamoDb.query(params).promise();
 // }
 
-
-// gets events for one day and returns promise
+/**
+ * gets events for one day and returns promise
+ *
+ * @param {*} haltDate
+ * @param {*} events
+ * @returns
+ */
 function persistDay(haltDate, events) {
-    const table = process.env.DYNAMODB_TABLE
+    const table = process.env.DYNAMODB_TABLE;
     const dynamoDb = db();
     return dynamoDb.query({
         TableName: table,
-        KeyConditionExpression: "haltDate = :haltDate",
+        KeyConditionExpression: 'haltDate = :haltDate',
         ExpressionAttributeValues: {
-            ":haltDate": haltDate
-        }
-    }).promise().then(saved => {
-        return Promise.all(events.map(event => saveOne(event, saved.Items, dynamoDb)));
-        //{ Items: [], Count: 0, ScannedCount: 0 }
-        //{ Items: 
+            ':haltDate': haltDate,
+        },
+    }).promise().then((saved) => {
+        return Promise.all(events.map((event) => saveOne(event, saved.Items, dynamoDb)));
+        // { Items: [], Count: 0, ScannedCount: 0 }
+        // { Items:
         //      [ { symbol: 'WG',
         //      updatedAt: '2018-04-10T02:31:09.618Z',
         //      createdAt: '2018-04-10T02:31:09.618Z',
@@ -77,21 +82,20 @@ function persistDay(haltDate, events) {
         //      haltTime: '2018-03-26T17:00:42.000Z' } ],
         // Count: 1,
         // ScannedCount: 1 }
-    })
+    });
 }
 
-//event - incoming event
-//saved - existing events in dynamodb
+// event - incoming event
+// saved - existing events in dynamodb
 function saveOne(event, saved, dynamoDb) {
-
-    //skip test events
+    // skip test events
     if (!event.symbol || !event.name) {
         console.log(`skip: ${JSON.stringify(event)}`);
-        return { status: "skip", reason: `empty ${propt}` };
+        return {status: 'skip', reason: `empty ${propt}`};
     }
 
     let match;
-    saved.forEach(existing => {
+    saved.forEach((existing) => {
         if (event.symbol === existing.symbol
             && event.market === existing.market
             && event.haltTime.toISOString() === existing.haltTime) {
@@ -99,7 +103,7 @@ function saveOne(event, saved, dynamoDb) {
         }
     });
     const table = process.env.DYNAMODB_TABLE;
-    if (!match) { //add new item
+    if (!match) { // add new item
         const timestamp = new Date().toISOString();
         const item = Object.assign(
             {
@@ -109,34 +113,34 @@ function saveOne(event, saved, dynamoDb) {
                 updatedAt: timestamp,
             },
             event
-        )
-        //convert all dates to ISO string as it is how they are stored in DynamoDB
+        );
+        // convert all dates to ISO string as it is how they are stored in DynamoDB
         for (var propt in item) {
             if (typeof (item[propt].toISOString) === 'function') {
-                item[propt] = item[propt].toISOString()
+                item[propt] = item[propt].toISOString();
             }
         }
 
         return dynamoDb.put({
             TableName: table,
             Item: item,
-        }).promise()
+        }).promise();
     }
-    //todo: update if changes detected
-    return { status: "exist" };
+    // todo: update if changes detected
+    return {status: 'exist'};
 }
 
 function persist(events) {
     // group by events by date as date is primary key db
     const grouped = groupBy(events, (e) => formatDate(e));
 
-    return Promise.all(Object.getOwnPropertyNames(grouped).map(g => persistDay(g, grouped[g])))
-        //flatten array or arrays
-        .then(r => r.reduce((accumulator, currentValue) => accumulator.concat(currentValue), []));
+    return Promise.all(Object.getOwnPropertyNames(grouped).map((g) => persistDay(g, grouped[g])))
+        // flatten array or arrays
+        .then((r) => r.reduce((accumulator, currentValue) => accumulator.concat(currentValue), []));
 };
 
 module.exports = {
     // dailyEvents: dailyEvents,
     persist: persist,
     list: list,
-}
+};
