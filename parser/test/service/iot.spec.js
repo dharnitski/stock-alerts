@@ -7,12 +7,12 @@ const expect = require('chai').expect;
 const iot = require('../../service/iot');
 
 describe('IOT', () => {
-    describe('integration ', () => {
-        it('iot', async () => {
-            const actual = await iot.handler({ message: 'hello' });
-            expect(actual).to.deep.equal({});
-        });
-    });
+    // describe('integration ', () => {
+    //     it('iot', async () => {
+    //         const actual = await iot.handler({ message: 'hello' });
+    //         expect(actual).to.deep.equal({});
+    //     });
+    // });
 
     describe('publish', () => {
         beforeEach(() => {
