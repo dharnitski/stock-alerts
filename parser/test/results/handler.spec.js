@@ -1,7 +1,7 @@
 'use strict';
 /* global describe it beforeEach */
 
-var AWS = require('aws-sdk-mock');
+const AWS = require('aws-sdk-mock');
 const expect = require('chai').expect;
 
 const myLambda = require('../../results/handler');

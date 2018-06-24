@@ -1,10 +1,12 @@
 'use strict';
 /* global describe it beforeEach */
 
-
 const nock = require('nock');
 const expect = require('chai').expect;
 const fs = require('fs');
+
+jest.mock('../../service/dynamodb');
+const dynamodb = require('../../service/dynamodb');
 
 const myLambda = require('../../upload/handler');
 
@@ -14,12 +16,30 @@ describe('Upload', () => {
             nock.cleanAll();
         });
 
+        describe('nasdaqtrader returned one item', () => {
+            const resp = { data: [{ name: 'Bob' }] };
+            beforeEach(() => {
+                const empty = fs.readFileSync('./parser/test/testdata/1item.xml', 'utf8');
+                nock('https://www.nasdaqtrader.com/rss.aspx')
+                    .get('?feed=tradehalts')
+                    .reply(200, empty);
+                dynamodb.persist.mockResolvedValue(resp);
+            });
+
+            it('should process halts', async () => {
+                const actual = await myLambda.handler({});
+                expect(actual).to.deep.equal(resp);
+            });
+        });
+
         describe('nasdaqtrader returned empty list', () => {
             beforeEach(() => {
                 const empty = fs.readFileSync('./parser/test/testdata/empty.xml', 'utf8');
                 nock('https://www.nasdaqtrader.com/rss.aspx')
                     .get('?feed=tradehalts')
                     .reply(200, empty);
+                // I wish jest.clearAllMocks(); would work :(
+                dynamodb.persist.mockResolvedValue([]);
             });
 
             it('should process halts', async () => {

@@ -38,7 +38,7 @@ describe('Dymamo', () => {
                 expect(params.Item.market).to.equal('NYSE');
                 expect(params.Item.reasonCode).to.equal('T1');
                 expect(params.Item.haltTime).to.equal('2018-03-26T17:00:42.000Z');
-                callback(null, {name: 'a'});
+                callback(null, {});
             });
         });
         afterEach(() => {
@@ -47,7 +47,8 @@ describe('Dymamo', () => {
 
         it('should persist', (done) => {
             persist([item]).then((actual) => {
-                expect(actual[0].name).to.equal('a');
+                expect(actual[0].status).to.equal('saved');
+                expect(actual[0].data.haltDate).to.equal('2018-03-26');
                 done();
             });
         });
@@ -84,7 +85,8 @@ describe('Dymamo', () => {
 
         it('should persist', (done) => {
             persist([item]).then((actual) => {
-                expect(actual[0].name).to.equal('a');
+                expect(actual[0].status).to.equal('saved');
+                expect(actual[0].data.haltDate).to.equal('2018-03-26');
                 done();
             });
         });

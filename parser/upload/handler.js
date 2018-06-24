@@ -16,8 +16,9 @@ module.exports.handler = async (event) => {
     throw new Error(`got ${res.status} from with body: ${body}`);
   }
   const transformed = await transform(body);
-  return await persist(transformed.channel.items);
-
+  const saved = await persist(transformed.channel.items);
+  console.log('Saved:', saved);
+  return saved;
   // Use this code if you don't use the http event with the LAMBDA-PROXY integration
   // callback(null, { message: 'Go Serverless v1.0! Your function executed successfully!', event });
 };

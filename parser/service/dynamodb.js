@@ -85,13 +85,35 @@ function persistDay(haltDate, events) {
     });
 }
 
-// event - incoming event
-// saved - existing events in dynamodb
+/**
+ * Saves one event
+ * @param {Object} event Incoming event
+ * @param {Object[]} saved Existing events in dynamodb
+ * @param {AWS.DynamoDB.DocumentClient} dynamoDb Data Storage
+ * @return {Promise}
+ */
 function saveOne(event, saved, dynamoDb) {
     // skip test events
     if (!event.symbol || !event.name) {
         console.log(`skip: ${JSON.stringify(event)}`);
-        return {status: 'skip', reason: `empty ${propt}`};
+        return { status: 'skip', reason: 'test event - empty symbol or name', data: event };
+    }
+    const table = process.env.DYNAMODB_TABLE;
+    const timestamp = new Date().toISOString();
+    const item = Object.assign(
+        {
+            haltDate: formatDate(event),
+            sort: formatTime(event),
+            createdAt: timestamp,
+            updatedAt: timestamp,
+        },
+        event
+    );
+    // convert all dates to ISO string as it is how they are stored in DynamoDB
+    for (const propt in item) {
+        if (typeof (item[propt].toISOString) === 'function') {
+            item[propt] = item[propt].toISOString();
+        }
     }
 
     let match;
@@ -102,32 +124,30 @@ function saveOne(event, saved, dynamoDb) {
             match = existing;
         }
     });
-    const table = process.env.DYNAMODB_TABLE;
     if (!match) { // add new item
-        const timestamp = new Date().toISOString();
-        const item = Object.assign(
-            {
-                haltDate: formatDate(event),
-                sort: formatTime(event),
-                createdAt: timestamp,
-                updatedAt: timestamp,
-            },
-            event
-        );
-        // convert all dates to ISO string as it is how they are stored in DynamoDB
-        for (var propt in item) {
-            if (typeof (item[propt].toISOString) === 'function') {
-                item[propt] = item[propt].toISOString();
-            }
-        }
-
         return dynamoDb.put({
             TableName: table,
             Item: item,
-        }).promise();
+        }).promise()
+            .then(() => saveResult('saved', item));
     }
     // todo: update if changes detected
-    return {status: 'exist'};
+    return saveResult('exist', item);
+}
+
+
+/**
+ * Generate save result object
+ *
+ * @param {string} status Action execution status
+ * @param {object} item Object to save
+ * @return {object} Result
+ */
+function saveResult(status, item) {
+    return {
+        status: status,
+        data: item,
+    };
 }
 
 function persist(events) {
@@ -140,7 +160,6 @@ function persist(events) {
 };
 
 module.exports = {
-    // dailyEvents: dailyEvents,
     persist: persist,
     list: list,
 };
