@@ -14,19 +14,19 @@ describe('Results', () => {
         name: 'Willbros Group, Inc.',
         market: 'NYSE',
         reasonCode: 'T1',
-        haltTime: new Date('2018-03-26T17:00:42.000Z')
+        haltTime: new Date('2018-03-26T17:00:42.000Z'),
     };
 
     describe('get one', () => {
         beforeEach(() => {
             AWS.mock('DynamoDB.DocumentClient', 'scan', (params, callback) => {
                 expect(params.TableName).to.equal('stock-alerts-dev');
-                callback(null, { Items: [item] });
+                callback(null, {Items: [item]});
             });
         });
         afterEach(() => {
             AWS.restore('DynamoDB.DocumentClient');
-        })
+        });
 
         it('should return', (done) => {
             myLambda.handler({}, { /* context */ }, (err, result) => {
@@ -35,13 +35,12 @@ describe('Results', () => {
                     expect(result).to.exist;
                     expect(result.statusCode).to.equal(200);
                     done();
-                }
-                catch (error) {
+                } catch (error) {
                     done(error);
                 }
             });
-        })
-    })
+        });
+    });
 
     describe('throw error', () => {
         let old;
@@ -55,7 +54,7 @@ describe('Results', () => {
         afterEach(() => {
             AWS.restore('DynamoDB.DocumentClient');
             console.error = old;
-        })
+        });
 
         it('should return', (done) => {
             myLambda.handler({}, { /* context */ }, (err, result) => {
@@ -64,11 +63,10 @@ describe('Results', () => {
                     expect(result).to.exist;
                     expect(result.statusCode).to.equal(501);
                     done();
-                }
-                catch (error) {
+                } catch (error) {
                     done(error);
                 }
             });
-        })
-    })
-})
+        });
+    });
+});

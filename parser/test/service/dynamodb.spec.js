@@ -5,7 +5,6 @@ const AWS = require('aws-sdk-mock');
 const expect = require('chai').expect;
 
 const persist = require('../../service/dynamodb').persist;
-// const dailyEvents = require('../../service/dynamodb').dailyEvents;
 
 describe('Dymamo', () => {
     process.env.DYNAMODB_TABLE = 'stock-alerts-dev';
@@ -18,26 +17,42 @@ describe('Dymamo', () => {
         haltTime: new Date('2018-03-26T17:00:42.000Z'),
     };
 
-    describe('create new', () => {
+    const item2 = {
+        symbol: 'ABIL',
+        name: 'Ability Inc.',
+        market: 'NASDAQ',
+        reasonCode: 'LUDP',
+        haltTime: new Date('2018-03-26T10:34:47.000Z'),
+    };
+
+    describe('query returns no items', () => {
         beforeEach(() => {
             AWS.mock('DynamoDB.DocumentClient', 'query', (params, callback) => {
                 expect(params.TableName).to.equal('stock-alerts-dev');
                 expect(params.KeyConditionExpression).to.equal('haltDate = :haltDate');
                 expect(params.TableName).to.equal('stock-alerts-dev');
                 expect(params.ExpressionAttributeValues[':haltDate']).to.equal('2018-03-26');
-                callback(null, {Items: [], Count: 0, ScannedCount: 0});
+                callback(null, {
+                    Items: [],
+                    Count: 0,
+                    ScannedCount: 0,
+                });
             });
             AWS.mock('DynamoDB.DocumentClient', 'put', (params, callback) => {
-                expect(params.TableName).to.equal('stock-alerts-dev');
-                expect(params.Item.haltDate).to.equal('2018-03-26');
-                expect(params.Item.sort).to.equal('17:00:42.000Z_NYSE_WG');
-                expect(params.Item.createdAt).to.not.empty;
-                expect(params.Item.updatedAt).to.not.empty;
-                expect(params.Item.symbol).to.equal('WG');
-                expect(params.Item.name).to.equal('Willbros Group, Inc.');
-                expect(params.Item.market).to.equal('NYSE');
-                expect(params.Item.reasonCode).to.equal('T1');
-                expect(params.Item.haltTime).to.equal('2018-03-26T17:00:42.000Z');
+                if (params.Item.symbol === 'WG') {
+                    expect(params.TableName).to.equal('stock-alerts-dev');
+                    expect(params.Item.haltDate).to.equal('2018-03-26');
+                    expect(params.Item.sort).to.equal('17:00:42.000Z_NYSE_WG');
+                    expect(params.Item.createdAt).to.not.empty;
+                    expect(params.Item.updatedAt).to.not.empty;
+                    expect(params.Item.symbol).to.equal('WG');
+                    expect(params.Item.name).to.equal('Willbros Group, Inc.');
+                    expect(params.Item.market).to.equal('NYSE');
+                    expect(params.Item.reasonCode).to.equal('T1');
+                    expect(params.Item.haltTime).to.equal('2018-03-26T17:00:42.000Z');
+                } else {
+                    expect(params.Item.symbol).to.equal('ABIL');
+                }
                 callback(null, {});
             });
         });
@@ -45,16 +60,28 @@ describe('Dymamo', () => {
             AWS.restore('DynamoDB.DocumentClient');
         });
 
-        it('should persist', (done) => {
+        it('should persist one event', (done) => {
             persist([item]).then((actual) => {
-                expect(actual[0].status).to.equal('saved');
-                expect(actual[0].data.haltDate).to.equal('2018-03-26');
+                expect(actual.length).to.equal(1);
+                expect(actual[0].status).to.equal('add');
+                expect(actual[0].data).to.deep.equal(item);
+                done();
+            });
+        });
+
+        it('should persist two events', (done) => {
+            persist([item, item2]).then((actual) => {
+                expect(actual.length).to.equal(2);
+                expect(actual[0].status).to.equal('add');
+                expect(actual[0].data).to.deep.equal(item);
+                expect(actual[1].status).to.equal('add');
+                expect(actual[1].data).to.deep.equal(item2);
                 done();
             });
         });
     });
 
-    describe('not matching item', () => {
+    describe('query returns not matching item', () => {
         beforeEach(() => {
             AWS.mock('DynamoDB.DocumentClient', 'query', (params, callback) => {
                 callback(null,
@@ -76,17 +103,20 @@ describe('Dymamo', () => {
                     });
             });
             AWS.mock('DynamoDB.DocumentClient', 'put', (params, callback) => {
-                callback(null, {name: 'a'});
+                callback(null, {
+                    name: 'a',
+                });
             });
         });
         afterEach(() => {
             AWS.restore('DynamoDB.DocumentClient');
         });
 
-        it('should persist', (done) => {
+        it('should insert new item', (done) => {
             persist([item]).then((actual) => {
-                expect(actual[0].status).to.equal('saved');
-                expect(actual[0].data.haltDate).to.equal('2018-03-26');
+                expect(actual.length).to.equal(1);
+                expect(actual[0].status).to.equal('add');
+                expect(actual[0].data).to.deep.equal(item);
                 done();
             });
         });
@@ -122,18 +152,26 @@ describe('Dymamo', () => {
             AWS.restore('DynamoDB.DocumentClient');
         });
 
-        it('should persist', (done) => {
+        it('should skip', (done) => {
             persist([item]).then((actual) => {
-                expect(actual[0].status).to.equal('exist');
+                expect(actual[0].status).to.equal('exists');
+                expect(actual[0].data).to.deep.equal(item);
                 done();
             });
         });
     });
 
-    describe('skip empty field', () => {
+    describe('skip event with empty symbol (test event)', () => {
+        let old;
         beforeEach(() => {
+            old = console.warn;
+            console.warn = () => { };
             AWS.mock('DynamoDB.DocumentClient', 'query', (params, callback) => {
-                callback(null, {Items: [], Count: 0, ScannedCount: 0});
+                callback(null, {
+                    Items: [],
+                    Count: 0,
+                    ScannedCount: 0,
+                });
             });
             AWS.mock('DynamoDB.DocumentClient', 'put', (params, callback) => {
                 fail('put should not be called');
@@ -141,6 +179,7 @@ describe('Dymamo', () => {
         });
         afterEach(() => {
             AWS.restore('DynamoDB.DocumentClient');
+            console.warn = old;
         });
 
         const noSymbol = {
@@ -155,6 +194,9 @@ describe('Dymamo', () => {
         it('should skip', (done) => {
             persist([noSymbol]).then((actual) => {
                 expect(actual[0].status).to.equal('skip');
+                expect(actual[0].reason).to.equal('test event - empty symbol or name');
+                // to do: this should work
+                // expect(actual[0].data).to.equal(item);
                 done();
             });
         });

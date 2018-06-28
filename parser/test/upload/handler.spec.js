@@ -7,6 +7,8 @@ const fs = require('fs');
 
 jest.mock('../../service/dynamodb');
 const dynamodb = require('../../service/dynamodb');
+jest.mock('../../service/iot');
+const iot = require('../../service/iot');
 
 const myLambda = require('../../upload/handler');
 
@@ -16,19 +18,28 @@ describe('Upload', () => {
             nock.cleanAll();
         });
 
+
         describe('nasdaqtrader returned one item', () => {
-            const resp = { data: [{ name: 'Bob' }] };
+            const resp = [{'status': 'add', 'data': {}}];
             beforeEach(() => {
                 const empty = fs.readFileSync('./parser/test/testdata/1item.xml', 'utf8');
                 nock('https://www.nasdaqtrader.com/rss.aspx')
                     .get('?feed=tradehalts')
                     .reply(200, empty);
                 dynamodb.persist.mockResolvedValue(resp);
+                iot.handler.mockResolvedValue(resp);
             });
 
             it('should process halts', async () => {
                 const actual = await myLambda.handler({});
                 expect(actual).to.deep.equal(resp);
+            });
+
+            it('should send iot debug message', async () => {
+                process.env.DEBUG_IOT = true;
+                const actual = await myLambda.handler({});
+                expect(actual).to.deep.equal(resp);
+                process.env.DEBUG_IOT = undefined;
             });
         });
 
@@ -42,7 +53,7 @@ describe('Upload', () => {
                 dynamodb.persist.mockResolvedValue([]);
             });
 
-            it('should process halts', async () => {
+            it('should return empty list', async () => {
                 const actual = await myLambda.handler({});
                 expect(actual).to.deep.equal([]);
             });

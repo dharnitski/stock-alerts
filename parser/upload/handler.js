@@ -5,6 +5,7 @@
 const fetch = require('node-fetch');
 const transform = require('./transform').transform;
 const persist = require('../service/dynamodb').persist;
+const iot = require('../service/iot');
 
 module.exports.handler = async (event) => {
   // const url = "https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts&haltdate=03282018";
@@ -16,9 +17,31 @@ module.exports.handler = async (event) => {
     throw new Error(`got ${res.status} from with body: ${body}`);
   }
   const transformed = await transform(body);
-  const saved = await persist(transformed.channel.items);
-  console.log('Saved:', saved);
-  return saved;
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // callback(null, { message: 'Go Serverless v1.0! Your function executed successfully!', event });
+  const persisted = await persist(transformed.channel.items);
+
+  const messages = persisted
+    .filter((element) => element.status === 'add')
+    .map((element) => iot.handler(element));
+
+  await Promise.all(messages);
+
+  if (process.env.DEBUG_IOT) {
+    // debug - send test message for every tick
+    const message = {
+      status: 'debug',
+      data: {
+        'symbol': 'DEBUG',
+        'name': 'NAME',
+        'reasonCode': 'T3',
+        'market': 'NYSE',
+        'haltTime': new Date().toISOString(),
+      },
+    };
+    await iot.handler(message);
+    console.debug(message);
+  }
+
+  return persisted;
 };
+
+

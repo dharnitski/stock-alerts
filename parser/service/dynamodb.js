@@ -2,7 +2,6 @@
 
 const AWS = require('aws-sdk');
 
-
 function db() {
     return new AWS.DynamoDB.DocumentClient(
         {
@@ -35,28 +34,12 @@ function groupBy(xs, f) {
     return xs.reduce((r, v, i, a, k = f(v)) => ((r[k] || (r[k] = [])).push(v), r), {});
 }
 
-// function dailyEvents(date) {
-//     const dynamoDb = db();
-//     var params = {
-//         ExpressionAttributeValues: {
-//             ':id': 'GNPX1523024948'
-//         },
-
-//         //KeyConditionExpression: 'id = :id',
-//         KeyConditionExpression: 'begins_with ( id, :id )',
-//         //
-//         TableName: process.env.DYNAMODB_TABLE
-//     };
-
-//     return dynamoDb.query(params).promise();
-// }
-
 /**
  * gets events for one day and returns promise
  *
- * @param {*} haltDate
- * @param {*} events
- * @returns
+ * @param {string} haltDate date in string format '2018-03-26'
+ * @param {Object[]} events halt events for this date
+ * @return {Promise}
  */
 function persistDay(haltDate, events) {
     const table = process.env.DYNAMODB_TABLE;
@@ -85,8 +68,11 @@ function persistDay(haltDate, events) {
     });
 }
 
+const StatusAdd = 'add';
+
 /**
- * Saves one event
+ * Checked if event is in already saved (in saved list)
+ * and put it into DynamoDB if it is not
  * @param {Object} event Incoming event
  * @param {Object[]} saved Existing events in dynamodb
  * @param {AWS.DynamoDB.DocumentClient} dynamoDb Data Storage
@@ -95,11 +81,18 @@ function persistDay(haltDate, events) {
 function saveOne(event, saved, dynamoDb) {
     // skip test events
     if (!event.symbol || !event.name) {
-        console.log(`skip: ${JSON.stringify(event)}`);
-        return { status: 'skip', reason: 'test event - empty symbol or name', data: event };
+        console.warn('skip test event: ', event);
+        return {
+            status: 'skip',
+            reason: 'test event - empty symbol or name',
+            data: event,
+        };
     }
     const table = process.env.DYNAMODB_TABLE;
     const timestamp = new Date().toISOString();
+
+    // item to save into DynamoDB
+    // code below adds some DynamoDB specific fields.
     const item = Object.assign(
         {
             haltDate: formatDate(event),
@@ -129,10 +122,10 @@ function saveOne(event, saved, dynamoDb) {
             TableName: table,
             Item: item,
         }).promise()
-            .then(() => saveResult('saved', item));
+            .then(() => saveResult(StatusAdd, event));
     }
     // todo: update if changes detected
-    return saveResult('exist', item);
+    return saveResult('exists', event);
 }
 
 
@@ -151,10 +144,11 @@ function saveResult(status, item) {
 }
 
 function persist(events) {
-    // group by events by date as date is primary key db
+    // group by events by date as date is primary key in db
     const grouped = groupBy(events, (e) => formatDate(e));
 
-    return Promise.all(Object.getOwnPropertyNames(grouped).map((g) => persistDay(g, grouped[g])))
+    return Promise.all(Object.getOwnPropertyNames(grouped)
+        .map((g) => persistDay(g, grouped[g])))
         // flatten array or arrays
         .then((r) => r.reduce((accumulator, currentValue) => accumulator.concat(currentValue), []));
 };
@@ -162,4 +156,5 @@ function persist(events) {
 module.exports = {
     persist: persist,
     list: list,
+    StatusAdd: StatusAdd,
 };

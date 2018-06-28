@@ -12,6 +12,8 @@ provider:
   region: us-east-1
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    IOT_TOPIC: /${self:service}-${opt:stage, self:provider.stage}/alert
+    IOT_ENDPOINT: a1kq7r55rfrhuj.iot.us-east-1.amazonaws.com
   iamRoleStatements:
     - Effect: Allow
       Action:
